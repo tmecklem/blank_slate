@@ -4,6 +4,20 @@ This is a web application written using the Phoenix web framework.
 
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
 - Use the already included and available `:req` (`Req`) library for HTTP requests, **avoid** `:httpoison`, `:tesla`, and `:httpc`. Req is included by default and is the preferred HTTP client for Phoenix apps
+- Don't add `Co-Authored-By` or other attribution lines to git commit messages or PR descriptions
+- There is no GitHub Actions CI. `mix signoff` runs `mix precommit` and posts a passing status on the pushed commit via the `gh signoff` extension
+
+### Writing style
+
+Applies to code comments, commit messages, PR descriptions, and replies.
+
+- **Keep a comment shorter than the code it explains, or delete it.** A comment must say something the code cannot. Where it restates the code, cut it rather than reword it
+- **Cut stock phrases** — any vivid-sounding phrase carrying no information the plain wording wouldn't (e.g. "blast radius", "escape hatch", "buys nothing", "ride along")
+- **Lead with the result.** No preamble, no restating the request, no closing recap
+
+### Development environment
+
+Launchbox drops provision from `.launchbox/vm.json` (one-time `setup` steps baked into the snapshot) and run `.launchbox/supervisord.conf` on every boot. A new system package needs a setup step; a new background service needs a `[program:...]` plus whatever installs it. Toolchain versions live in `.tool-versions` (installed by mise).
 
 ### Phoenix v1.8 guidelines
 

@@ -9,6 +9,7 @@
     "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise install elixir nodejs",
     "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- mix local.hex --force && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- mix local.rebar --force",
     "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- npm install -g --prefix \"$HOME/.local\" --no-fund --no-audit --no-progress --loglevel=error @anthropic-ai/claude-code @openai/codex @google/gemini-cli opencode-ai",
+    "mkdir -p \"$HOME/.local/share/gh/extensions\" && (gh extension install basecamp/gh-signoff || git clone --depth 1 https://github.com/basecamp/gh-signoff.git \"$HOME/.local/share/gh/extensions/gh-signoff\")",
     "printf \"listen_addresses = '127.0.0.1'\\n\" | sudo tee -a /etc/postgresql/17/main/postgresql.conf >/dev/null && sudo pg_ctlcluster 17 main start && sudo -u postgres psql -tAc \"ALTER USER postgres WITH PASSWORD 'postgres'\"",
     "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- mix setup"
   ]
