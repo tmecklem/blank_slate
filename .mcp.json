@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+    "tidewave": {
+      "type": "http",
+      "url": "http://localhost:4000/tidewave/mcp"
+    },
     "launchbox": {
       "type": "http",
       "url": "https://box.launchscout.com/mcp-codemode"
