@@ -1,0 +1,16 @@
+{
+  "runtime": "vm",
+  "setup": [
+    "sudo apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Use-Pty=0 build-essential autoconf bison ca-certificates curl gnupg lsb-release locales libssl-dev libncurses-dev zlib1g-dev libyaml-dev libreadline-dev libffi-dev libgmp-dev libgdbm-dev libdb-dev uuid-dev inotify-tools unzip procps supervisor universal-ctags",
+    "sudo sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && sudo locale-gen >/dev/null && printf 'export LANG=en_US.UTF-8\\nexport LC_ALL=en_US.UTF-8\\nexport ELIXIR_ERL_OPTIONS=+fnu\\n' | sudo tee /etc/profile.d/blank_slate.sh >/dev/null",
+    "curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /usr/share/keyrings/postgresql-keyring.gpg && echo \"deb [signed-by=/usr/share/keyrings/postgresql-keyring.gpg] http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main\" | sudo tee /etc/apt/sources.list.d/pgdg.list >/dev/null && sudo apt-get update && sudo env DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends -o Dpkg::Use-Pty=0 postgresql-17 postgresql-client-17 libpq-dev",
+    "curl -fsSL https://mise.run | sh && printf 'export PATH=\"%s/.local/share/mise/shims:%s/.local/bin:$PATH\"\\n' \"$HOME\" \"$HOME\" | sudo tee /etc/profile.d/mise.sh >/dev/null",
+    "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise install erlang",
+    "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise install elixir nodejs",
+    "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- mix local.hex --force && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- mix local.rebar --force",
+    "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- npm install -g --prefix \"$HOME/.local\" --no-fund --no-audit --no-progress --loglevel=error @anthropic-ai/claude-code @openai/codex @google/gemini-cli opencode-ai",
+    "mkdir -p \"$HOME/.local/share/gh/extensions\" && (gh extension install basecamp/gh-signoff || git clone --depth 1 https://github.com/basecamp/gh-signoff.git \"$HOME/.local/share/gh/extensions/gh-signoff\")",
+    "printf \"listen_addresses = '127.0.0.1'\\n\" | sudo tee -a /etc/postgresql/17/main/postgresql.conf >/dev/null && sudo pg_ctlcluster 17 main start && sudo -u postgres psql -tAc \"ALTER USER postgres WITH PASSWORD 'postgres'\"",
+    "cd /workspaces/blank_slate && MISE_QUIET=1 MISE_TERMINAL_PROGRESS=0 mise exec -- mix setup"
+  ]
+}

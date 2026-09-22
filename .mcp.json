@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "launchbox": {
+      "type": "http",
+      "url": "https://box.launchscout.com/mcp-codemode"
+    }
+  }
+}
